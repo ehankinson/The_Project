@@ -1,0 +1,43 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+mainClassName = project.properties['main'] ?: 'Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'uk.co.electronstudio.jaylib:jaylib:4.5.+'
+}
+
+application {
+    if(DefaultNativePlatform.currentOperatingSystem.isMacOsX()) {
+        applicationDefaultJvmArgs = ['-XstartOnFirstThread']
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+distributions {
+    main {
+        contents {
+            into('resources'){
+                from 'resources'
+            }
+        }
+    }
+}
+
