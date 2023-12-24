@@ -7,7 +7,7 @@ public class Player extends Creature{
     private static ArrayList<Projectile> projList = new ArrayList<>();
 
     public Player() {
-//        ethan was here at 1:41
+//        ethan was here at 1:41am
         super(100,10, 10, 100, 100, 5, 20);
         DrawCircle(posX, posY, size, RED);
     }
